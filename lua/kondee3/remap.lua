@@ -32,7 +32,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>nvim", "<cmd>e C:/Users/Ewa/AppData/Local/nvim/<CR>");
-vim.keymap.set("n", "<leader>rust", "<cmd>e C:/Users/Ewa/Desktop/Rust<CR>");
+vim.keymap.set("n", "<leader>rust", "<cmd>e C:/Users/Ewa/<CR>");
 
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd(":w")

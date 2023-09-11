@@ -11,15 +11,7 @@ return require('packer').startup(function(use)
     use({ 'rose-pine/neovim', as = 'rose-pine' })
     vim.cmd('colorscheme rose-pine')
 
-    use ('nvim-tree/nvim-web-devicons')
-    use({
-        "folke/trouble.nvim",
-        config = function()
-            require("trouble").setup {
-           }
-        end
-    })
-
+    use('nvim-tree/nvim-web-devicons')
     use {
         'nvim-treesitter/nvim-treesitter', run = function()
         local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
