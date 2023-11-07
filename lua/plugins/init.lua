@@ -13,20 +13,19 @@ opt.smartindent = true
 opt.wrap = false
 opt.swapfile = false
 opt.backup = false
-opt.undodir = os.getenv('Ewa') .. "/.vim/undodir"
+opt.undodir = os.getenv "Ewa" .. "/.vim/undodir"
 opt.undofile = true
 opt.hlsearch = false
 opt.incsearch = true
 opt.termguicolors = true
 opt.scrolloff = 8
 opt.signcolumn = "yes"
-opt.isfname:append("@-@")
+opt.isfname:append "@-@"
 opt.updatetime = 50
 opt.colorcolumn = "100"
 local default_plugins = {
 
   "nvim-lua/plenary.nvim",
-
   {
     "NvChad/base46",
     branch = "v2.0",
@@ -66,7 +65,6 @@ local default_plugins = {
       end, 0)
     end,
   },
-
   {
     "nvim-tree/nvim-web-devicons",
     opts = function()
@@ -234,6 +232,7 @@ local default_plugins = {
     end,
   },
 
+  -- open the tree
   -- file managing , picker etc
   {
     "nvim-tree/nvim-tree.lua",
@@ -289,10 +288,30 @@ local default_plugins = {
   { "nvim-tree/nvim-web-devicons" },
   { "folke/zen-mode.nvim", opts = {} },
   { "tpope/vim-fugitive" },
-  {"folke/trouble.nvim", 
-        cmd = {"TroubleToggle", "Trouble"},
-        dependencies ={"nvim-tree/nvim-web-devicons"},
-  opts={},},
+  {
+    "folke/trouble.nvim",
+    cmd = { "TroubleToggle" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
+  },
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
+    init = function()
+      vim.g.rustfmt_autosave = 1
+    end,
+  },
+  {
+    "simrat39/rust-tools.nvim",
+    ft = "rust",
+    dependencies = "neovim/nvim-lspconfig",
+    opts = function()
+      return require "plugins.configs.rust-tools"
+    end,
+    config = function(_, opts)
+      require("rust-tools").setup(opts)
+    end,
+  },
 }
 
 local config = require("core.utils").load_config()
