@@ -1,5 +1,13 @@
 local options = {
-  ensure_installed = { "lua-language-server", "rust-analyzer" }, -- not an option from mason.nvim
+  ensure_installed = {
+    "deno",
+    "lua-language-server",
+    "rust-analyzer",
+    "prettier",
+    "pylyzer",
+    "stylua",
+    "typescript-language-server",
+  }, -- not an option from mason.nvr
 
   PATH = "skip",
 

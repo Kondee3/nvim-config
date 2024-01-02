@@ -157,6 +157,19 @@ local default_plugins = {
   },
 
   {
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+    "neovim/nvim-lspconfig",
+    opts = function()
+      local lspconfig = require "lspconfig"
+      require("mason-lspconfig").setup_handlers {
+        function(server)
+          lspconfig[server].setup {}
+        end,
+      }
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     init = function()
       require("core.utils").lazy_load "nvim-lspconfig"
