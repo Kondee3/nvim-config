@@ -248,6 +248,7 @@ local default_plugins = {
   -- open the tree
   -- file managing , picker etc
   {
+
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     init = function()
@@ -298,7 +299,6 @@ local default_plugins = {
     end,
   },
   { "mbbill/undotree" },
-  { "nvim-tree/nvim-web-devicons" },
   { "folke/zen-mode.nvim", opts = {} },
   { "tpope/vim-fugitive" },
   {
@@ -325,6 +325,8 @@ local default_plugins = {
       require("rust-tools").setup(opts)
     end,
   },
+
+  { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 }
 
 local config = require("core.utils").load_config()
