@@ -4,9 +4,12 @@ local options = {
     "lua-language-server",
     "rust-analyzer",
     "prettier",
-    "pylyzer",
+    "pyright",
     "stylua",
     "typescript-language-server",
+    "black",
+    "mypy",
+    "ruff",
   }, -- not an option from mason.nvr
 
   PATH = "skip",

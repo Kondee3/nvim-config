@@ -327,6 +327,7 @@ local default_plugins = {
   },
 
   { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
+  { "wakatime/vim-wakatime"},
 }
 
 local config = require("core.utils").load_config()

@@ -3,6 +3,7 @@ require "nvchad.lsp"
 
 local M = {}
 local utils = require "core.utils"
+local lspconfig = require("lspconfig")
 
 -- export on_attach & capabilities for custom lspconfigs
 
@@ -41,7 +42,7 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-require("lspconfig").lua_ls.setup {
+lspconfig.lua_ls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
 
@@ -63,5 +64,10 @@ require("lspconfig").lua_ls.setup {
     },
   },
 }
+lspconfig.pyright.setup({
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+    filetypes = {"python"},
+})
 
 return M
