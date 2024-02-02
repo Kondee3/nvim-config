@@ -70,4 +70,5 @@ lspconfig.pyright.setup({
     filetypes = {"python"},
 })
 
+
 return M

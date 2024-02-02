@@ -2,7 +2,6 @@ local options = {
   ensure_installed = {
     "deno",
     "lua-language-server",
-    "rust-analyzer",
     "prettier",
     "pyright",
     "stylua",

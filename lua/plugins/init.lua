@@ -315,19 +315,21 @@ local default_plugins = {
     end,
   },
   {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    dependencies = "neovim/nvim-lspconfig",
-    opts = function()
-      return require "plugins.configs.rust-tools"
-    end,
-    config = function(_, opts)
-      require("rust-tools").setup(opts)
-    end,
+    "mrcjkb/rustaceanvim",
+    lazy = false,
+    version = "^3", -- Recommended
+    ft = { "rust" },
   },
 
-  { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
-  { "wakatime/vim-wakatime"},
+  { "wakatime/vim-wakatime", lazy = false },
+  {
+    "saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("crates").setup()
+    end,
+  },
 }
 
 local config = require("core.utils").load_config()
