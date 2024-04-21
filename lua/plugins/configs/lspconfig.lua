@@ -10,7 +10,6 @@ local lspconfig = require("lspconfig")
 M.on_attach = function(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
-
   utils.load_mappings("lspconfig", { buffer = bufnr })
 
   if client.server_capabilities.signatureHelpProvider then
@@ -20,6 +19,7 @@ M.on_attach = function(client, bufnr)
   if not utils.load_config().ui.lsp_semantic_tokens and client.supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
   end
+  
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -70,5 +70,10 @@ lspconfig.pyright.setup({
     filetypes = {"python"},
 })
 
+-- lspconfig.rust_analyzer.setup({
+--     on_attach = function(client, bufnr)
+--       vim.lsp.inlay_hint.enable(bufnr)
+--     end
+-- })
 
 return M

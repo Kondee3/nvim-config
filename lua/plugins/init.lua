@@ -310,6 +310,7 @@ local default_plugins = {
   {
     "rust-lang/rust.vim",
     ft = "rust",
+    lazy = false,
     init = function()
       vim.g.rustfmt_autosave = 1
     end,
@@ -317,8 +318,12 @@ local default_plugins = {
   {
     "mrcjkb/rustaceanvim",
     lazy = false,
-    version = "^3", -- Recommended
+    version = "^4",
     ft = { "rust" },
+    
+    -- vim.g.rustaceanvim = require "plugins.configs.rustaceanvim",
+
+      -- load extensions
   },
 
   { "wakatime/vim-wakatime", lazy = false },
@@ -337,5 +342,30 @@ local config = require("core.utils").load_config()
 if #config.plugins > 0 then
   table.insert(default_plugins, { import = config.plugins })
 end
+
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {
+  },
+  -- LSP configuration
+  server = {
+    on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(bufnr, true)
+    end,
+    default_settings = {
+      -- rust-analyzer language server configuration
+      ['rust-analyzer'] = {
+         cargo = {
+            allFeatures = true,
+            loadOutDirsFromCheck = true,
+            runBuildScripts = true,
+          },
+      },
+    },
+  },
+  -- DAP configuration
+  dap = {
+  },
+}
 
 require("lazy").setup(default_plugins, config.lazy_nvim)
