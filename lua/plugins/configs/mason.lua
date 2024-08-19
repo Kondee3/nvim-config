@@ -9,6 +9,9 @@ local options = {
     "black",
     "mypy",
     "ruff",
+    "arduino-language-server",
+    "clang-format",
+    "clangd"
   }, -- not an option from mason.nvr
 
   PATH = "skip",

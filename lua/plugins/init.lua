@@ -303,9 +303,17 @@ local default_plugins = {
   { "tpope/vim-fugitive" },
   {
     "folke/trouble.nvim",
-    cmd = { "TroubleToggle" },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "Trouble" },
     opts = {},
+    lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      {
+        "<leader>xq",
+        "<cmd>Trouble diagnostics toggle focus=false<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+    },
   },
   {
     "rust-lang/rust.vim",
@@ -320,13 +328,12 @@ local default_plugins = {
     lazy = false,
     version = "^4",
     ft = { "rust" },
-    
+
     -- vim.g.rustaceanvim = require "plugins.configs.rustaceanvim",
 
-      -- load extensions
+    -- load extensions
   },
 
-  { "wakatime/vim-wakatime", lazy = false },
   {
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
@@ -345,27 +352,25 @@ end
 
 vim.g.rustaceanvim = {
   -- Plugin configuration
-  tools = {
-  },
+  tools = {},
   -- LSP configuration
   server = {
     on_attach = function(client, bufnr)
-      vim.lsp.inlay_hint.enable(bufnr, true)
+      vim.lsp.inlay_hint.enable(true)
     end,
     default_settings = {
       -- rust-analyzer language server configuration
-      ['rust-analyzer'] = {
-         cargo = {
-            allFeatures = true,
-            loadOutDirsFromCheck = true,
-            runBuildScripts = true,
-          },
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+        },
       },
     },
   },
   -- DAP configuration
-  dap = {
-  },
+  dap = {},
 }
 
 require("lazy").setup(default_plugins, config.lazy_nvim)
