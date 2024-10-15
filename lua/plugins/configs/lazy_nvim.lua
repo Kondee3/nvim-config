@@ -9,6 +9,11 @@ return {
       loaded = "",
       not_loaded = "",
     },
+    border = "rounded",
+    size = {
+      width = 0.8,
+      height = 0.8,
+    },
   },
 
   performance = {

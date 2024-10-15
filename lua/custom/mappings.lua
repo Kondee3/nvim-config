@@ -50,7 +50,7 @@ M.personal = {
       end,
     },
     --Trouble
-    ["<leader>xq"] = { "<cmd>Trouble diagnostics toggle<cr>" },
+    ["<A-CR>"] = { "<cmd>Trouble diagnostics toggle<cr>" },
 
     ["<leader>zZ"] = {
       function()

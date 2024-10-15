@@ -22,6 +22,11 @@ local options = {
       package_installed = "󰄳 ",
       package_uninstalled = " 󰚌",
     },
+    border = "rounded",
+    size = {
+      width = 0.8,
+      height = 0.8,
+    },
 
     keymaps = {
       toggle_server_expand = "<CR>",

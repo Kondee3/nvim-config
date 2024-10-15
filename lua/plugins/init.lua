@@ -67,6 +67,7 @@ local default_plugins = {
   },
   {
     "nvim-tree/nvim-web-devicons",
+    lazy = false,
     opts = function()
       return { override = require "nvchad.icons.devicons" }
     end,
@@ -250,6 +251,7 @@ local default_plugins = {
   {
 
     "nvim-tree/nvim-tree.lua",
+    lazy = false,
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     init = function()
       require("core.utils").load_mappings "nvimtree"
