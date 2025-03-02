@@ -7,6 +7,7 @@ M.general = {
   },
 }
 
+
 M.personal = {
   n = {
     ["<leader>gs"] = { vim.cmd.Git },

@@ -64,16 +64,6 @@ lspconfig.lua_ls.setup {
     },
   },
 }
-lspconfig.pyright.setup({
-    on_attach = M.on_attach,
-    capabilities = M.capabilities,
-    filetypes = {"python"},
-})
 
--- lspconfig.rust_analyzer.setup({
---     on_attach = function(client, bufnr)
---       vim.lsp.inlay_hint.enable(bufnr)
---     end
--- })
 
 return M

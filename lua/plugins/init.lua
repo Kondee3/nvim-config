@@ -1,28 +1,5 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 -- List of all default plugins & their definitions
-local opt = vim.opt
-
-opt.guicursor = ""
-opt.nu = true
-opt.relativenumber = true
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
-opt.smartindent = true
-opt.wrap = false
-opt.swapfile = false
-opt.backup = false
-opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
-opt.undofile = true
-opt.hlsearch = false
-opt.incsearch = true
-opt.termguicolors = true
-opt.scrolloff = 8
-opt.signcolumn = "yes"
-opt.isfname:append "@-@"
-opt.updatetime = 50
-opt.colorcolumn = "100"
 local default_plugins = {
 
   "nvim-lua/plenary.nvim",
@@ -44,6 +21,10 @@ local default_plugins = {
     "NvChad/nvterm",
     init = function()
       require("core.utils").load_mappings "nvterm"
+    end,
+
+    opts = function()
+      return require("plugins.configs.others").nvterm
     end,
     config = function(_, opts)
       require "base46.term"
@@ -300,50 +281,6 @@ local default_plugins = {
       require("which-key").setup(opts)
     end,
   },
-  { "mbbill/undotree" },
-  { "folke/zen-mode.nvim", opts = {} },
-  { "tpope/vim-fugitive" },
-  {
-    "folke/trouble.nvim",
-    cmd = { "Trouble" },
-    opts = {},
-    lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = {
-      {
-        "<leader>xq",
-        "<cmd>Trouble diagnostics toggle focus=false<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-    },
-  },
-  {
-    "rust-lang/rust.vim",
-    ft = "rust",
-    lazy = false,
-    init = function()
-      vim.g.rustfmt_autosave = 1
-    end,
-  },
-  {
-    "mrcjkb/rustaceanvim",
-    lazy = false,
-    version = "^4",
-    ft = { "rust" },
-
-    -- vim.g.rustaceanvim = require "plugins.configs.rustaceanvim",
-
-    -- load extensions
-  },
-
-  {
-    "saecki/crates.nvim",
-    event = { "BufRead Cargo.toml" },
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("crates").setup()
-    end,
-  },
 }
 
 local config = require("core.utils").load_config()
@@ -352,27 +289,5 @@ if #config.plugins > 0 then
   table.insert(default_plugins, { import = config.plugins })
 end
 
-vim.g.rustaceanvim = {
-  -- Plugin configuration
-  tools = {},
-  -- LSP configuration
-  server = {
-    on_attach = function(client, bufnr)
-      vim.lsp.inlay_hint.enable(true)
-    end,
-    default_settings = {
-      -- rust-analyzer language server configuration
-      ["rust-analyzer"] = {
-        cargo = {
-          allFeatures = true,
-          loadOutDirsFromCheck = true,
-          runBuildScripts = true,
-        },
-      },
-    },
-  },
-  -- DAP configuration
-  dap = {},
-}
 
 require("lazy").setup(default_plugins, config.lazy_nvim)

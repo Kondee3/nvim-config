@@ -1,17 +1,5 @@
 local options = {
   ensure_installed = {
-    "deno",
-    "lua-language-server",
-    "prettier",
-    "pyright",
-    "stylua",
-    "typescript-language-server",
-    "black",
-    "mypy",
-    "ruff",
-    "arduino-language-server",
-    "clang-format",
-    "clangd"
   }, -- not an option from mason.nvr
 
   PATH = "skip",

@@ -1,4 +1,4 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -10,7 +10,11 @@ local plugins = {
     dependencies = {
       -- format & linting
       {
-        "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
+        dependencies = {
+          "nvimtools/none-ls-extras.nvim",
+          "jay-babu/mason-null-ls.nvim",
+        },
         config = function()
           require "custom.configs.null-ls"
         end,
@@ -25,7 +29,7 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
 
   {
@@ -47,19 +51,68 @@ local plugins = {
     end,
   },
 
-  -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
+  { "mbbill/undotree" },
+  { "folke/zen-mode.nvim", opts = {} },
+  { "tpope/vim-fugitive" },
+  {
+    "folke/trouble.nvim",
+    cmd = { "Trouble" },
+    opts = {},
+    lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+      {
+        "<leader>xq",
+        "<cmd>Trouble diagnostics toggle focus=false<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+    },
+  },
+  {
+    "rust-lang/rust.vim",
+    ft = "rust",
+    lazy = false,
+    init = function()
+      vim.g.rustfmt_autosave = 1
+    end,
+  },
+  {
+    "mrcjkb/rustaceanvim",
+    lazy = false,
+    version = "^4",
+    ft = { "rust" },
+  },
 
-  -- All NvChad plugins are lazy-loaded by default
-  -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-  -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-  -- {
-  --   "mg979/vim-visual-multi",
-  --   lazy = false,
-  -- }
+  {
+    "saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("crates").setup()
+    end,
+  },
 }
 
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {},
+  -- LSP configuration
+  server = {
+    on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(true)
+    end,
+    default_settings = {
+      -- rust-analyzer language server configuration
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+        },
+      },
+    },
+  },
+  -- DAP configuration
+  dap = {},
+}
 return plugins
