@@ -12,6 +12,7 @@ require("mason-null-ls").setup {
     "clang-format",
     "clangd",
     "python-lsp-server",
+    "protols",
   },
   automatic_installation = true,
 }
